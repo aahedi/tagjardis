@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SiTrapes</title>
+<meta http-equiv="x-ua-compatible" content="IE=edge" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<link rel="stylesheet" type="text/css" href="css/snap.css" />
+<link rel="stylesheet" type="text/css" href="css/demo.css" />
+<link rel="stylesheet" type="text/css" href="css/menu.css" />
+<link rel="stylesheet" href="style.css" type="text/css"/>
+<link rel="stylesheet" href="android.css" type="text/css"/>
+<link rel="stylesheet" href="jquery-ui.css">
+
+<script src="cordova.js"></script>
+</head>
+<body>
+	<div id="layang">
+		<div id="logo"><img src="image/logo.png" width="100" height="100"></div>
+		<div class="nama_app"><table width="100%" height="45px" border="0"><tr>
+		<td style="vertical-align:middle" align="left" valign="middle"><div id="nama_aplikasi">SiTrapes</div></td></tr></table></div>
+	</div>
+
+		<div id="content" class="snap-content" style="overflow:hidden">
+		<div id="isi" data-snap-ignore="true">
+			<div id="main_container">
+							<div class="judul_isi">Area Peta</div>
+							<table>
+							<tr>
+								<td align="center">
+									<input type="number" name="" value="" placeholder="Masukan IDPEL" id="id_pelanggan_cari_peta">
+									<button onclick="cari_lokasi_pelanggan()">Go Tracking</button>
+									<hr>
+									<div id="map_div" style="height: 360px;"></div>
+								</td>
+							</tr>
+							</table>
+							<div id="map-canvas" data-snap-ignore="true" style=""></div>
+					</div>
+
+				    <div id="navbawah" style="height:auto;">
+									<ul>
+									      <li id="border"><a style="padding:10px" href="index.html">< KEMBALI</a></li>
+									</ul>
+			        </div>
+		</div>
+		</div>
+		<div id="loading" style="display:block"><img src="loading.gif"></div>
+		
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3"></script>
+<script type="text/javascript" language="javascript" src="jquery.min.js"></script>
+<!--<script type="text/javascript" language="javascript" src="js/jquery.accordionMenu.js"></script>-->
+<script type="text/javascript">
+var url = "http://sitrapes.com/app/";
+var url_admin = "http://sitrapes.com/";
+
+function cari_lokasi_pelanggan(){
+  $('#loading').show();
+  var id_pel_pln = $('#id_pelanggan_cari_peta').val();
+  $.ajax({
+      url:url+'act_cari_pelanggan',
+      data: {
+          id_pel_pln: id_pel_pln,
+      },
+      method: 'POST',
+      success: function(data) {
+        var data = JSON.parse(data);
+        if(data.status=="salah"){
+          alert("Maaf id pelanggan yang anda inputkan salah");
+        }else{
+           bukapeta(data.koor_lat+','+data.koor_long)
+        }
+        $('#loading').hide();
+      }
+  });
+}
+$(document).ready(function() {
+  ambil_koordinat();
+});
+function ambil_koordinat(){
+$.ajax({
+    url:url+'tampil_koordinat',
+    data: { },
+    method: 'POST',
+		dataType: '',
+  })
+  .done(function(data) {
+		var map;
+		var places =  JSON.parse(data);
+		google.maps.event.addDomListener(window, "load", function () {
+		    var map = new google.maps.Map(document.getElementById("map_div"), {
+		        mapTypeId: google.maps.MapTypeId.ROADMAP,
+		    });
+		    var infoWindow = new google.maps.InfoWindow();
+		    var bounds = new google.maps.LatLngBounds();
+		    function createMarker(options, html) {
+		        var marker = new google.maps.Marker(options);
+		        bounds.extend(options.position);
+		        if (html) {
+		            google.maps.event.addListener(marker, "click", function () {
+		                infoWindow.setContent(html);
+		                infoWindow.open(options.map, this);
+		                map.setZoom(map.getZoom() + 1)
+		                map.setCenter(marker.getPosition());
+		            });
+		        }
+		        return marker;
+		    }
+
+		    for (var i = 0; i < places.pel.length; i++) {
+					  var link = "<a onclick=\"bukapeta("+places.pel[i].koor_lat+","+places.pel[i].koor_long+")\">"+places.pel[i].nama+"</a>";
+		        createMarker({
+		            position: new google.maps.LatLng(places.pel[i].koor_lat,places.pel[i].koor_long),
+		            map: map,
+		            icon: {
+		                path: "M27.648 -41.399q0 -3.816 -2.7 -6.516t-6.516 -2.7 -6.516 2.7 -2.7 6.516 2.7 6.516 6.516 2.7 6.516 -2.7 2.7 -6.516zm9.216 0q0 3.924 -1.188 6.444l-13.104 27.864q-0.576 1.188 -1.71 1.872t-2.43 0.684 -2.43 -0.684 -1.674 -1.872l-13.14 -27.864q-1.188 -2.52 -1.188 -6.444 0 -7.632 5.4 -13.032t13.032 -5.4 13.032 5.4 5.4 13.032z",
+		                scale: 0.6,
+		                strokeWeight: 0.2,
+		                strokeColor: 'black',
+		                strokeOpacity: 1,
+		                fillColor: places.pel[i].warna_rbm,
+		                fillOpacity: 0.85,
+		            },
+		        },link);
+		   };
+		  map.fitBounds(bounds);
+		});
+		$('#loading').hide();
+  });
+
+}
+
+function bukapeta(tujuan){
+launchnavigator.navigate(
+  bersih(tujuan),
+  null,
+  function(){
+      alert("Plugin success");
+  },
+  function(error){
+      alert("Plugin error: "+ error);
+  });
+}
+
+function bersih(str) {
+  return str.split(' ').join('').replace(/[\])}[{(]/g, '');
+}
+
+</script>
+</body>
+</html>

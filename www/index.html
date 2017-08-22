@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SiTrapes</title>
+<meta http-equiv="x-ua-compatible" content="IE=edge" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<link rel="stylesheet" type="text/css" href="css/snap.css" />
+<link rel="stylesheet" type="text/css" href="css/demo.css" />
+<link rel="stylesheet" type="text/css" href="css/menu.css" />
+<link rel="stylesheet" href="style.css" type="text/css"/>
+<link rel="stylesheet" href="android.css" type="text/css"/>
+<link rel="stylesheet" href="jquery-ui.css">
+
+<script src="cordova.js"></script>
+</head>
+<body>
+	<div id="layang">
+		<div id="logo"><img src="image/logo.png" width="100" height="100"></div>
+		<div class="nama_app"><table width="100%" height="45px" border="0"><tr>
+		<td style="vertical-align:middle" align="left" valign="middle"><div id="nama_aplikasi"></div></td></tr></table></div>
+		<!--<div class="logo_menu" ><img src="image/pesan.png" class="icon_pesan" onclick="buka_pesan()"></div>-->
+	</div>
+
+		<div id="content" class="snap-content">
+		<div id="isi" data-snap-ignore="true">
+			<div id="main_container">
+					<!--<button onclick="kembali()">Kembali</button>-->
+					<div class="halaman data_baru" style="display:none"> <!-- AREA HALAMAN MENU UTAMA -->
+							<div class="judul_isi">Tambah Data Baru</div>
+								<table>
+								<tr>
+									<td align="center">
+										 <img src="" id="gambar_1" alt="" style="max-width:100%"><br>
+										 <button onclick="capturePhoto_1()">Ambil Foto 1</button>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										 <img src="" id="gambar_2" alt="" style="max-width:100%"><br>
+										 <button onclick="capturePhoto_2()">Ambil Foto 2</button>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										 <img src="" id="gambar_3" alt="" style="max-width:100%"><br>
+										 <button onclick="capturePhoto_3()">Ambil Foto 3</button>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 No Meter <br>
+										 <input type="number" id="no_meter" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 ID Pelanggan PLN<br>
+										 <input type="number" id="id_pel_pln" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Nama<br>
+										 <input type="text" id="nama" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Alamat <br>
+										 <input type="text" id="alamat" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Unit <br>
+										 <select id="id_unit"></select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Type KWH <br>
+										 <select id="type_kwh">
+											 	<option value='1'>Prabayar</option>
+											 	<option value='2'>Pascabayar</option>
+										 </select>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										 Nomor HP <br>
+										 <input type="text" id="no_telp_pel" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Kode RBM <br>
+										 <select id="id_rbm"></select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Indikasi <br>
+										 <input type="text" id="indikasi" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Koordinat <br>
+										 <input style="width:40%;float:left" type="text" id="koor_lat" value="" disabled="">
+										 <input style="width:40%;float:right"  type="text" id="koor_long" value="" disabled="">
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<button onclick="kirim_data('online')">Kirim Data</button>
+                    <button onclick="kirim_data('offline')">Simpan Offline</button>
+                    <button onclick="reset_input_data()">Reset</button>
+								    </td>
+								</tr>
+								</table>
+
+
+					</div>
+					<div class="halaman edit_data" style="display:none"> <!-- AREA HALAMAN MENU UTAMA -->
+							<div class="judul_isi">Update / Hapus Data Lama</div>
+								<table>
+								<tr>
+									<td align="center">
+										<input type="number" name="" value="" placeholder="Masukan IDPEL" id="id_pelanggan_cari">
+										<button onclick="cari_pelanggan()">Cari Pelanggan</button>
+										<hr>
+									</td>
+								</tr>
+								</table>
+
+								<table class="data_edit" style="display:none">
+								<tr>
+									<td align="center">
+
+										 <input type="hidden" id="nama_gambar_1">
+										 <input type="hidden" id="nama_gambar_2">
+										 <input type="hidden" id="nama_gambar_3">
+										 <input type="hidden" id="id_pelanggan">
+
+										 <img src="" id="gambar_1_up" alt="" style="max-width:100%"><br>
+										 <button onclick="capturePhoto_1_up()">Ambil Foto 1</button>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										 <img src="" id="gambar_2_up" alt="" style="max-width:100%"><br>
+										 <button onclick="capturePhoto_2_up()">Ambil Foto 2</button>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										 <img src="" id="gambar_3_up" alt="" style="max-width:100%"><br>
+										 <button onclick="capturePhoto_3_up()">Ambil Foto 3</button>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 No Meter <br>
+										 <input type="number" id="no_meter_up" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 ID Pelanggan PLN<br>
+										 <input type="number" id="id_pel_pln_up" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Nama<br>
+										 <input type="text" id="nama_up" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Alamat <br>
+										 <input type="text" id="alamat_up" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Unit <br>
+										 <select id="id_unit_up"></select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Type KWH <br>
+										 <select id="type_kwh_up">
+												<option value='1'>Prabayar</option>
+												<option value='2'>Pascabayar</option>
+										 </select>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										 Nomor HP <br>
+										 <input type="number" id="no_telp_pel_up" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Kode RBM <br>
+										 	 <select id="id_rbm_up"></select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Indikasi <br>
+										 <input type="text" id="indikasi_up" value="">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Koordinat <br>
+										 <input style="width:40%;float:left" type="text" id="koor_lat_up" value="" disabled="">
+										 <input style="width:40%;float:right"  type="text" id="koor_long_up" value="" disabled="">
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<!--<button onclick="kirim_data()">Kirim Data</button> -->
+										<button onclick="update_data()">Update Data</button>
+										<button onclick="hapus_data()">Hapus Data</button>
+										<button onclick="reset_update_data()">Reset</button>
+									</td>
+								</tr>
+								</table>
+
+
+					</div>
+					<div class="halaman peta" style="display:none"> <!-- AREA HALAMAN MENU UTAMA -->
+							<div class="judul_isi">Area Peta</div>
+							<table>
+							<tr>
+								<td align="center">
+									<input type="number" name="" value="" placeholder="Masukan IDPEL" id="id_pelanggan_cari_peta">
+									<button onclick="cari_lokasi_pelanggan()">Cari Lokasi Pelanggan</button>
+									<hr>
+								</td>
+							</tr>
+							</table>
+							<div id="map-canvas" data-snap-ignore="true" style=""></div>
+					</div>
+
+					<div class="halaman data_offline" style="display:none"> <!-- AREA HALAMAN MENU UTAMA -->
+							<div class="judul_isi">Data Offline</div>
+							<table id="list_offline"></table>
+
+							<hr>
+					</div>
+
+					<div class="halaman profil" style="display:none"></div>
+
+					<div class="halaman halaman-login"> <!-- AREA HALAMAN DAFTAR -->
+							<div class="judul_isi">Form Login Si Trapes</div>
+							<table>
+								<tr>
+									<td>
+										 Email/No Handphone <br>
+										 <input type="text" id="telp_login">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										 Password <br>
+										 <input type="password" id="pass_login">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<button onclick="kirim_login()">Login</button>
+										<!--<button onclick="buka_halaman('data_baru','')">Login</button>-->
+									</td>
+								</tr>
+							</table>
+					</div>
+
+			</div>
+		</div>
+		</div>
+        <div id="navbawah" style="display:none">
+<ul>
+      <li id="border"><a href="javascript:;" onclick="logout()"><img src="image/logout.png" class="icon_produk"/></a></li>
+    	<li id="border"><a href="javascript:;" onclick="buka_halaman('data_baru','')"><img src="image/add_data.png" class="icon_produk"/></a></li>
+    	<li id="border"><a href="javascript:;" onclick="buka_halaman('data_offline','')"><img src="image/data_offline.png" class="icon_produk"/></a></li>
+    	<li id="border"><a href="javascript:;" onclick="buka_halaman('edit_data','')"><img src="image/edit_data.png" class="icon_produk"/></a></li>
+      <li id="border"><a href="peta.html"><img src="image/map.png" class="icon_produk"/></a></li>
+</ul>
+        </div>
+		<div id="loading" style="display:blcok"><img src="loading.gif"></div>
+
+<script type="text/javascript" language="javascript" src="jquery.min.js"></script>
+<script type="text/javascript" language="javascript" src="function.js"></script>
+</body>
+</html>
