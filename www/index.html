@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="android.css" type="text/css"/>
 <link rel="stylesheet" href="jquery-ui.css">
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBim7iC0TGzy6m2BX_XJYCucOk7KhL5qt0"></script>
 <script src="cordova.js"></script>
 </head>
 <body>
@@ -33,77 +34,61 @@
 								<tr>
 									<td align="center">
 										 <img src="" id="gambar_1" alt="" style="max-width:100%"><br>
-										 <button onclick="capturePhoto_1()">Ambil Foto 1</button>
+										 <button onclick="capturePhoto_1()">Foto pondasi tiang</button>
 									</td>
 								</tr>
 								<tr>
 									<td align="center">
 										 <img src="" id="gambar_2" alt="" style="max-width:100%"><br>
-										 <button onclick="capturePhoto_2()">Ambil Foto 2</button>
+										 <button onclick="capturePhoto_2()">Foto konstruksi traves dan isolator</button>
 									</td>
 								</tr>
 								<tr>
 									<td align="center">
 										 <img src="" id="gambar_3" alt="" style="max-width:100%"><br>
-										 <button onclick="capturePhoto_3()">Ambil Foto 3</button>
+										 <button onclick="capturePhoto_3()">Foto gardu</button>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 No Meter <br>
-										 <input type="number" id="no_meter" value="">
+										 No Kontrak <br>
+										 <input type="text" id="no_kontrak" value="">
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 ID Pelanggan PLN<br>
-										 <input type="number" id="id_pel_pln" value="">
+										 Nama Vendor<br>
+										 <input type="text" id="nama_vendor" value="">
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 Nama<br>
-										 <input type="text" id="nama" value="">
+										 Nama Konstruksi<br>
+										 <input type="text" id="nama_konstruksi" value="">
+									</td>
+								</tr> 
+								<tr>
+									<td>
+										 Area <br>
+										 <select id="id_area"></select>
+									</td>
+								</tr>   
+								<tr>
+									<td>
+										 Rayon<br>
+										 <select id="id_rayon"></select>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 Alamat <br>
-										 <input type="text" id="alamat" value="">
+										 Distrik <br>
+										 <input type="text" id="distrik" value="">
 									</td>
-								</tr>
+								</tr>								
 								<tr>
 									<td>
-										 Unit <br>
-										 <select id="id_unit"></select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 Type KWH <br>
-										 <select id="type_kwh">
-											 	<option value='1'>Prabayar</option>
-											 	<option value='2'>Pascabayar</option>
-										 </select>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										 Nomor HP <br>
-										 <input type="text" id="no_telp_pel" value="">
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 Kode RBM <br>
-										 <select id="id_rbm"></select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 Indikasi <br>
-										 <input type="text" id="indikasi" value="">
+										 Desa <br>
+										 <input type="text" id="desa" value="">
 									</td>
 								</tr>
 								<tr>
@@ -130,7 +115,7 @@
 								<table>
 								<tr>
 									<td align="center">
-										<input type="number" name="" value="" placeholder="Masukan IDPEL" id="id_pelanggan_cari">
+										<input type="number" name="" value="" placeholder="Masukan No kontrak" id="no_kontrak_cari">
 										<button onclick="cari_pelanggan()">Cari Pelanggan</button>
 										<hr>
 									</td>
@@ -147,77 +132,61 @@
 										 <input type="hidden" id="id_pelanggan">
 
 										 <img src="" id="gambar_1_up" alt="" style="max-width:100%"><br>
-										 <button onclick="capturePhoto_1_up()">Ambil Foto 1</button>
+										 <button onclick="capturePhoto_1_up()">Foto pondasi tiang</button>
 									</td>
 								</tr>
 								<tr>
 									<td align="center">
 										 <img src="" id="gambar_2_up" alt="" style="max-width:100%"><br>
-										 <button onclick="capturePhoto_2_up()">Ambil Foto 2</button>
+										 <button onclick="capturePhoto_2_up()">Foto Konstruksi traves dan isolator</button>
 									</td>
 								</tr>
 								<tr>
 									<td align="center">
 										 <img src="" id="gambar_3_up" alt="" style="max-width:100%"><br>
-										 <button onclick="capturePhoto_3_up()">Ambil Foto 3</button>
+										 <button onclick="capturePhoto_3_up()">Foto Gardu</button>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 No Meter <br>
-										 <input type="number" id="no_meter_up" value="">
+										 No Kontrak <br>
+										 <input type="number" id="no_kontrak_up" value="">
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 ID Pelanggan PLN<br>
-										 <input type="number" id="id_pel_pln_up" value="">
+										 Nama Vendor<br>
+										 <input type="text" id="nama_vendor_up" value="">
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 Nama<br>
-										 <input type="text" id="nama_up" value="">
+										 Nama Konstruksi<br>
+										 <input type="text" id="nama_konstruksi_up" value="">
+									</td>
+								</tr> 
+								<tr>
+									<td>
+										 Area <br>
+										 <select id="id_area_up"></select>
+									</td>
+								</tr>  
+								<tr>
+									<td>
+										 Rayon <br>
+										 	 <select id="id_rayon_up"></select>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 Alamat <br>
-										 <input type="text" id="alamat_up" value="">
+										 Distrik <br>
+										 <input type="text" id="distrik_up" value="">
 									</td>
 								</tr>
 								<tr>
 									<td>
-										 Unit <br>
-										 <select id="id_unit_up"></select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 Type KWH <br>
-										 <select id="type_kwh_up">
-												<option value='1'>Prabayar</option>
-												<option value='2'>Pascabayar</option>
-										 </select>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										 Nomor HP <br>
-										 <input type="number" id="no_telp_pel_up" value="">
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 Kode RBM <br>
-										 	 <select id="id_rbm_up"></select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 Indikasi <br>
-										 <input type="text" id="indikasi_up" value="">
+										 Desa <br>
+										 <input type="text" id="desa_up" value="">
 									</td>
 								</tr>
 								<tr>
@@ -245,13 +214,13 @@
 							<table>
 							<tr>
 								<td align="center">
-									<input type="number" name="" value="" placeholder="Masukan IDPEL" id="id_pelanggan_cari_peta">
+									<input type="number" name="" value="" placeholder="Masukan No Kontrak" id="no_kontrak_cari_peta">
 									<button onclick="cari_lokasi_pelanggan()">Cari Lokasi Pelanggan</button>
 									<hr>
 								</td>
 							</tr>
 							</table>
-							<div id="map-canvas" data-snap-ignore="true" style=""></div>
+							<div id="map_div" style="height: 360px;"></div>
 					</div>
 
 					<div class="halaman data_offline" style="display:none"> <!-- AREA HALAMAN MENU UTAMA -->
@@ -264,7 +233,7 @@
 					<div class="halaman profil" style="display:none"></div>
 
 					<div class="halaman halaman-login"> <!-- AREA HALAMAN DAFTAR -->
-							<div class="judul_isi">Form Login</div>
+							<div class="judul_isi">Form Login Tagjardis</div>
 							<table>
 								<tr>
 									<td>
@@ -296,11 +265,10 @@
     	<li id="border"><a href="javascript:;" onclick="buka_halaman('data_baru','')"><img src="image/add_data.png" class="icon_produk"/></a></li>
     	<li id="border"><a href="javascript:;" onclick="buka_halaman('data_offline','')"><img src="image/data_offline.png" class="icon_produk"/></a></li>
     	<li id="border"><a href="javascript:;" onclick="buka_halaman('edit_data','')"><img src="image/edit_data.png" class="icon_produk"/></a></li>
-      <li id="border"><a href="peta.html"><img src="image/map.png" class="icon_produk"/></a></li>
+      <li id="border"><a href="javascript:;" onclick="buka_halaman('peta','')"><img src="image/map.png" class="icon_produk"/></a></li>
 </ul>
         </div>
 		<div id="loading" style="display:blcok"><img src="loading.gif"></div>
-
 <script type="text/javascript" language="javascript" src="jquery.min.js"></script>
 <script type="text/javascript" language="javascript" src="function.js"></script>
 </body>
